@@ -188,6 +188,16 @@
         </exclusion>
       </exclusions>
     </dependency>
+      <dependency>
+          <groupId>org.mongodb</groupId>
+          <artifactId>mongo-java-driver</artifactId>
+          <version>3.12.7</version>
+      </dependency>
+      <dependency>
+          <groupId>io.javalin</groupId>
+          <artifactId>javalin</artifactId>
+          <version>3.11.0</version>
+      </dependency>
   </dependencies>
   <properties>
     <exec.mainClass>ar.edu.unq.ConextAPIKt</exec.mainClass>
