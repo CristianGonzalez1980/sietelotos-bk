@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminServiceImpl.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.services.impl</a> &gt; <span class="el_source">AdminServiceImpl.kt</span></div><h1>AdminServiceImpl.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.services.impl
+
+import ar.edu.unq.dao.AdminDAO
+import ar.edu.unq.modelo.Admin
+import ar.edu.unq.services.AdminService
+import ar.edu.unq.services.impl.exceptions.*
+import ar.edu.unq.services.runner.DataBaseType
+import ar.edu.unq.services.runner.TransactionRunner
+import ar.edu.unq.services.runner.TransactionType
+
+<span class="fc" id="L11">class AdminServiceImpl(</span>
+        private val adminDAO: AdminDAO,
+        private val dataBaseType: DataBaseType
+) : AdminService {
+
+    override fun recuperarAdmin(id: String): Admin {
+<span class="fc" id="L17">        return TransactionRunner.runTrx({</span>
+<span class="fc" id="L18">            this.obtenerAdmin(id)</span>
+<span class="fc" id="L19">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun recuperarAdmin(userName: String?, password: String?): Admin {
+<span class="fc" id="L23">        return TransactionRunner.runTrx({</span>
+<span class="fc" id="L24">            this.adminDAO.findEq(&quot;userName&quot;,userName).filter{</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">                it.password == password</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            }.firstOrNull() ?: throw AdministradorInexistenteException(&quot;El Admin no existe&quot;)</span>
+<span class="fc" id="L27">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun crearAdmin(admin: Admin) {
+<span class="fc" id="L31">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L32">            this.asegurarQueAdminNoExista(admin.id.toString())</span>
+<span class="fc" id="L33">            this.adminDAO.save(admin)</span>
+<span class="fc" id="L34">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L35">    }</span>
+
+    override fun recuperarATodosLosAdmin(): Collection&lt;Admin&gt; {
+<span class="fc" id="L38">        return TransactionRunner.runTrx({ this.adminDAO.getAll() }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    private fun obtenerAdmin(id: String): Admin{
+<span class="fc" id="L42">        val adminRecuperado = this.adminDAO.get(id)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        return adminRecuperado?:throw AdministradorInexistenteException(&quot;El administrador no existe&quot;)</span>
+    }
+
+    private fun asegurarQueAdminNoExista(id: String) {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if(this.adminDAO.get(id) != null){</span>
+<span class="fc" id="L48">            throw AdministradorExistenteException(&quot;El administrador ya existe&quot;)</span>
+        }
+<span class="fc" id="L50">    }</span>
+
+    override fun deleteAll() {
+<span class="fc" id="L53">        TransactionRunner.runTrx({ this.adminDAO.deleteAll() }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L54">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ar.edu.unq</groupId>
-    <artifactId>exposicion-virtual</artifactId>
+    <artifactId>siete-lotos</artifactId>
     <version>1.0.1</version>
     <packaging>jar</packaging>
 
-    <name>ar.edu.unq expo-virtual</name>
+    <name>ar.edu.unq siete-lotos</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

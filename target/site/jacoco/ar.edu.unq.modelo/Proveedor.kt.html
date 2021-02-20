@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Proveedor.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.modelo</a> &gt; <span class="el_source">Proveedor.kt</span></div><h1>Proveedor.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.modelo
+
+class Proveedor : ModelObjectWithBsonId {
+<span class="fc" id="L4">    var companyName: String = &quot;&quot;</span>
+<span class="fc" id="L5">    var companyImage: String = &quot;&quot;</span>
+<span class="fc" id="L6">    var companyBanner: String = &quot;&quot;</span>
+<span class="fc" id="L7">    var facebook: String = &quot;&quot;</span>
+<span class="fc" id="L8">    var instagram: String = &quot;&quot;</span>
+<span class="fc" id="L9">    var web: String = &quot;&quot;</span>
+<span class="fc" id="L10">    var productos: MutableList&lt;Producto&gt; = emptyList&lt;Producto&gt;().toMutableList()</span>
+<span class="fc" id="L11">    constructor()</span>
+
+    constructor(companyName: String, companyImage: String, companyBanner:String, facebook: String, instagram: String, web: String) {
+<span class="fc" id="L14">        this.companyName = companyName</span>
+<span class="fc" id="L15">        this.companyImage = companyImage</span>
+<span class="fc" id="L16">        this.companyBanner = companyBanner</span>
+<span class="fc" id="L17">        this.facebook = facebook</span>
+<span class="fc" id="L18">        this.instagram = instagram</span>
+<span class="fc" id="L19">        this.web = web</span>
+    }
+
+    fun addProduct(productoNuevo: Producto) {
+<span class="fc" id="L23">        productoNuevo.idProveedor = this.id</span>
+<span class="fc" id="L24">        productos.add(productoNuevo)</span>
+<span class="fc" id="L25">    }</span>
+
+    fun removeProduct(productoNuevo: Producto) {
+<span class="fc" id="L28">        productos.remove(productoNuevo)</span>
+<span class="fc" id="L29">    }</span>
+
+//    override fun castearAMiTipo(other: Any): Proveedor {
+//        return  other as Proveedor
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

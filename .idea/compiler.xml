@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="exposicion-virtual" />
-        <module name="exposicion-virtual (1)" />
+        <module name="siete-lotos" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="exposicion-virtual" target="1.7" />
       <module name="exposicion-virtual (1)" target="1.7" />
       <module name="exposicion-virtual (2)" target="1.5" />
+      <module name="siete-lotos" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

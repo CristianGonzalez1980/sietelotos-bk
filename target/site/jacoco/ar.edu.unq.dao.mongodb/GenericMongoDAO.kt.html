@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericMongoDAO.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.dao.mongodb</a> &gt; <span class="el_source">GenericMongoDAO.kt</span></div><h1>GenericMongoDAO.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.dao.mongodb
+
+import com.mongodb.client.ClientSession
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.model.Filters.eq
+import org.bson.conversions.Bson
+import ar.edu.unq.services.runner.TransactionRunner
+import com.mongodb.client.MongoDatabase
+import org.bson.Document
+import org.bson.types.ObjectId
+
+<span class="fc" id="L12">abstract class GenericMongoDAO&lt;T&gt;(val entityType: Class&lt;T&gt;) {</span>
+    open fun deleteAll() {
+<span class="fc" id="L14">        val session = this.sessionCheck()</span>
+<span class="fc" id="L15">        this.getCollection(entityType.simpleName, entityType).deleteMany(session, Document())</span>
+<span class="fc" id="L16">    }</span>
+
+    fun getAll(): List&lt;T&gt; {
+<span class="fc" id="L19">        val session = this.sessionCheck()</span>
+<span class="fc" id="L20">        return this.getCollection(entityType.simpleName, entityType).find().toMutableList()</span>
+    }
+
+     private fun getCollection(objectType: String, classType: Class&lt;T&gt;): MongoCollection&lt;T&gt;{
+        // Precondición: Debe haber una sesión en el contexto
+<span class="fc" id="L25">        val database = this.getDatabase()</span>
+<span class="fc" id="L26">        this.createColection(objectType,database)</span>
+<span class="fc" id="L27">        return database.getCollection(objectType, classType)</span>
+    }
+
+    protected open fun createColection(objectType: String, database: MongoDatabase){
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if(database.listCollectionNames().contains(objectType).not()) {</span>
+<span class="fc" id="L32">            database.createCollection(objectType)</span>
+        }
+<span class="fc" id="L34">    }</span>
+
+    open fun save(anObject: T) {
+<span class="fc" id="L37">        save(listOf(anObject))</span>
+<span class="fc" id="L38">    }</span>
+
+    open fun update(anObject: T, id: String?) {
+<span class="fc" id="L41">        val session = this.sessionCheck()</span>
+<span class="fc" id="L42">        this.getCollection(entityType.simpleName, entityType).replaceOne(session, eq(&quot;id&quot;, ObjectId(id)), anObject)</span>
+<span class="fc" id="L43">    }</span>
+
+    open fun save(objects: List&lt;T&gt;) {
+<span class="fc" id="L46">        val session = this.sessionCheck()</span>
+<span class="fc" id="L47">        this.getCollection(entityType.simpleName, entityType).insertMany(session, objects)</span>
+<span class="fc" id="L48">    }</span>
+
+    open fun delete(id: String){
+<span class="fc" id="L51">        this.deleteBy(&quot;id&quot;, ObjectId(id))</span>
+<span class="fc" id="L52">    }</span>
+
+    open fun &lt;E&gt; deleteBy(property:String, value: E?){
+<span class="fc" id="L55">        val session = this.sessionCheck()</span>
+<span class="fc" id="L56">        this.getCollection(entityType.simpleName, entityType).deleteOne(session, eq(property, value))</span>
+<span class="fc" id="L57">    }</span>
+
+    operator fun get(id: String?): T? {
+<span class="fc" id="L60">        return getBy(&quot;id&quot;, ObjectId(id))</span>
+    }
+
+    fun &lt;E&gt; getBy(property:String, value: E?): T? {
+<span class="fc" id="L64">        val session = this.sessionCheck()</span>
+<span class="fc" id="L65">        return this.getCollection(entityType.simpleName, entityType).find(Document(property,value)).first()</span>
+    }
+
+    fun &lt;E&gt; findEq(field:String, value:E ): List&lt;T&gt; {
+<span class="fc" id="L69">        return find(eq(field, value))</span>
+    }
+
+    fun find(filter:Bson): List&lt;T&gt; {
+<span class="fc" id="L73">        val session = this.sessionCheck()</span>
+<span class="fc" id="L74">        return this.getCollection(entityType.simpleName, entityType).find(filter).toMutableList()</span>
+    }
+
+//    fun &lt;T&gt; aggregate(pipeline:List&lt;Bson&gt; , resultClass:Class&lt;T&gt;): List&lt;T&gt; {
+//        val session:ClientSession = this.session_check()
+//        //if(session != null) {
+//        return this.getCollection(entityType.simpleName, entityType)!!.aggregate(session, pipeline, resultClass).into(ArrayList())
+//        //}
+//        //return this.getCollection(entityType.simpleName, entityType)!!.aggregate(pipeline, resultClass).into(ArrayList())
+//    }
+
+    protected fun getDatabase(): MongoDatabase{
+<span class="fc" id="L86">        return TransactionRunner.getTransaction().dataBase</span>
+    }
+
+    private fun sessionCheck(): ClientSession{
+<span class="fc" id="L90">        return TransactionRunner.getTransaction().currentSession</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

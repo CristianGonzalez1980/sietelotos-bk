@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionRunner.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.services.runner</a> &gt; <span class="el_source">TransactionRunner.kt</span></div><h1>TransactionRunner.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.services.runner
+
+import ar.edu.unq.services.runner.exceptions.DataBaseNameNotSettedException
+import ar.edu.unq.services.runner.exceptions.NoSessionContextException
+import ar.edu.unq.services.runner.exceptions.NoTransactionsException
+import com.mongodb.client.ClientSession
+import com.mongodb.client.MongoDatabase
+
+interface Transaction {
+    fun start(dataBaseType: DataBaseType)
+    fun commit()
+    fun rollback()
+}
+
+<span class="fc" id="L15">class MongoDBTransaction: Transaction {</span>
+    companion object {
+        private var session: ClientSession? = null
+        private var staticSessionFactoryProvider: MongoSessionFactoryProvider? = null
+    }
+
+    private var dataBaseName: String? = null
+    val currentSession: ClientSession
+        get() {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            return session ?: throw NoSessionContextException(&quot;No hay una sesión en el contexto&quot;)</span>
+        }
+    val sessionFactoryProvider: MongoSessionFactoryProvider
+        get() {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            return staticSessionFactoryProvider ?: throw NoSessionContextException(&quot;No hay una sesión en el contexto&quot;)</span>
+        }
+    val dataBase: MongoDatabase
+        get(){
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            val databasename = this.dataBaseName ?: throw DataBaseNameNotSettedException(&quot;La base de datos no esta definida&quot;)</span>
+<span class="fc" id="L33">            return this.sessionFactoryProvider.getDatabase(databasename)</span>
+        }
+
+    override fun start(dataBaseType: DataBaseType) {
+<span class="fc" id="L37">        this.dataBaseName = dataBaseType.databasename</span>
+<span class="fc" id="L38">        staticSessionFactoryProvider = MongoSessionFactoryProvider.instance</span>
+<span class="fc" id="L39">        session = sessionFactoryProvider.createSession()</span>
+<span class="fc" id="L40">        currentSession.startTransaction()</span>
+<span class="fc" id="L41">    }</span>
+
+    override fun commit() {
+<span class="fc" id="L44">        currentSession.commitTransaction()</span>
+<span class="fc" id="L45">        currentSession.close()</span>
+<span class="fc" id="L46">        dataBaseName = null</span>
+<span class="fc" id="L47">        staticSessionFactoryProvider = null</span>
+<span class="fc" id="L48">        session = null</span>
+<span class="fc" id="L49">    }</span>
+
+    override fun rollback() {
+<span class="fc" id="L52">        currentSession.abortTransaction()</span>
+<span class="fc" id="L53">        currentSession.close()</span>
+<span class="fc" id="L54">        dataBaseName = null</span>
+<span class="fc" id="L55">        staticSessionFactoryProvider = null</span>
+<span class="fc" id="L56">        session = null</span>
+<span class="fc" id="L57">    }</span>
+}
+
+enum class DataBaseType {
+<span class="fc" id="L61">    TEST {</span>
+        override val databasename: String
+<span class="fc" id="L63">            get() = &quot;pruebasback&quot;</span>
+    },
+
+<span class="fc" id="L66">    PRODUCCION {</span>
+        override val databasename: String
+<span class="fc" id="L68">            get() = &quot;produccionback&quot;</span>
+    };
+
+    abstract val databasename: String
+}
+
+enum class TransactionType {
+<span class="fc" id="L75">    MONGO {</span>
+        override fun getTransaction(): MongoDBTransaction {
+<span class="fc" id="L77">            return MongoDBTransaction()</span>
+        }
+    };
+    abstract fun getTransaction(): MongoDBTransaction
+}
+
+<span class="fc" id="L83">object TransactionRunner {</span>
+<span class="fc" id="L84">    private var transactions:List&lt;MongoDBTransaction&gt; = listOf()</span>
+
+    fun getTransaction(): MongoDBTransaction {
+        // Precondición: Debe haber una transacción en curso
+<span class="fc bfc" id="L88" title="All 4 branches covered.">        if(transactions.isNotEmpty()){</span>
+<span class="fc" id="L89">            return transactions[0]</span>
+        }else{
+<span class="fc" id="L91">            throw NoTransactionsException(&quot;Debe haber al menos una transaccion en curso&quot;)</span>
+        }
+    }
+
+
+    fun &lt;T&gt; runTrx(bloque: ()-&gt;T, types: List&lt;TransactionType&gt;, dataBaseType: DataBaseType): T {
+<span class="fc" id="L97">        transactions = types.map { it.getTransaction() }</span>
+<span class="fc" id="L98">        try{</span>
+<span class="fc" id="L99">            transactions.forEach { it.start(dataBaseType) }</span>
+<span class="fc" id="L100">            val result = bloque()</span>
+<span class="fc" id="L101">            transactions.forEach { it.commit() }</span>
+<span class="fc" id="L102">            transactions = emptyList()</span>
+<span class="fc" id="L103">            return result</span>
+<span class="fc" id="L104">        } catch (exception:Throwable){</span>
+<span class="fc" id="L105">            transactions.forEach { it.rollback() }</span>
+<span class="fc" id="L106">            transactions = emptyList()</span>
+<span class="fc" id="L107">            throw exception</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

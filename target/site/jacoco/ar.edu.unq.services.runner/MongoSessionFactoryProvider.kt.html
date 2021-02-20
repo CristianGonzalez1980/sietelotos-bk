@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MongoSessionFactoryProvider.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.services.runner</a> &gt; <span class="el_source">MongoSessionFactoryProvider.kt</span></div><h1>MongoSessionFactoryProvider.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.services.runner
+
+import com.mongodb.ConnectionString
+import com.mongodb.MongoClientSettings
+import com.mongodb.client.ClientSession
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoClients
+import com.mongodb.client.MongoDatabase
+import org.bson.codecs.configuration.CodecRegistries
+import org.bson.codecs.configuration.CodecRegistry
+import org.bson.codecs.pojo.PojoCodecProvider
+
+<span class="fc" id="L13">class MongoSessionFactoryProvider() {</span>
+    private var client : MongoClient
+<span class="fc" id="L15">    var session : ClientSession? = null</span>
+
+<span class="fc" id="L17">    init {</span>
+<span class="fc" id="L18">        val codecRegistry: CodecRegistry = CodecRegistries.fromRegistries(</span>
+<span class="fc" id="L19">                MongoClientSettings.getDefaultCodecRegistry(),</span>
+<span class="fc" id="L20">                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())</span>
+        )
+<span class="fc" id="L22">        val uri = System.getenv().getOrDefault(&quot;MONGO_URI&quot;, &quot;mongodb+srv://sietelocosdb:bxnBxuaQFwS2k9BY@clustersietelotos0.avmnt.mongodb.net/&quot;)</span>
+<span class="fc" id="L23">        val connectionString = ConnectionString(uri)</span>
+<span class="fc" id="L24">        val settings = MongoClientSettings.builder()</span>
+<span class="fc" id="L25">                .codecRegistry(codecRegistry)</span>
+<span class="fc" id="L26">                .applyConnectionString(connectionString)</span>
+<span class="fc" id="L27">                .build()</span>
+<span class="fc" id="L28">        client = MongoClients.create(settings)</span>
+<span class="fc" id="L29">    }</span>
+
+    companion object {
+
+        private var INSTANCE: MongoSessionFactoryProvider? = null
+        val instance: MongoSessionFactoryProvider
+            get() {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">                INSTANCE = INSTANCE ?: MongoSessionFactoryProvider()</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                return  INSTANCE!!</span>
+            }
+
+        fun destroy() {
+<span class="pc bpc" id="L41" title="1 of 6 branches missed.">            if (INSTANCE != null &amp;&amp; INSTANCE!!.session != null) {</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">                INSTANCE!!.client.close()</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                INSTANCE!!.session = null</span>
+            }
+<span class="fc" id="L45">            INSTANCE = null</span>
+<span class="fc" id="L46">        }</span>
+    }
+
+    fun getDatabase(databasename: String): MongoDatabase{
+<span class="fc" id="L50">        return this.client.getDatabase(databasename)</span>
+    }
+
+    fun createSession(): ClientSession {
+<span class="fc" id="L54">        val session = this.client.startSession()</span>
+<span class="fc" id="L55">        this.session = session</span>
+<span class="fc" id="L56">        return session</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

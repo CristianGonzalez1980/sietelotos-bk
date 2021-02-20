@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductoServiceImpl.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.services.impl</a> &gt; <span class="el_source">ProductoServiceImpl.kt</span></div><h1>ProductoServiceImpl.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.services.impl
+
+import ar.edu.unq.dao.ProductoDAO
+import ar.edu.unq.dao.ProveedorDAO
+import ar.edu.unq.modelo.BuscadorProductos
+import ar.edu.unq.modelo.Producto
+import ar.edu.unq.modelo.Proveedor
+import ar.edu.unq.services.ProductoService
+import ar.edu.unq.services.impl.exceptions.ProductoInexistenteException
+import ar.edu.unq.services.impl.exceptions.ProductoNoEncontradoException
+import ar.edu.unq.services.impl.exceptions.ProveedorInexistenteException
+import ar.edu.unq.services.runner.DataBaseType
+import ar.edu.unq.services.runner.TransactionRunner
+import ar.edu.unq.services.runner.TransactionType
+
+<span class="fc" id="L16">class ProductoServiceImpl(</span>
+        private val proveedorDAO: ProveedorDAO,
+        private val productoDAO: ProductoDAO,
+        private val dataBaseType: DataBaseType
+) : ProductoService {
+    override fun buscarProductos(texto: String): MutableList&lt;Producto&gt; {
+<span class="fc" id="L22">        val productos = recuperarATodosLosProductos()</span>
+<span class="fc" id="L23">        return BuscadorProductos.filtrar(texto, productos)</span>
+    }
+
+    override fun nuevoProducto(producto: Producto) {
+<span class="fc" id="L27">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L28">            val proveedor: Proveedor = this.obtenerProveedor(producto.idProveedor.toString())</span>
+<span class="fc" id="L29">            proveedor.addProduct(producto)</span>
+<span class="fc" id="L30">            this.proveedorDAO.update(proveedor, proveedor.id.toString())</span>
+<span class="fc" id="L31">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L32">    }</span>
+
+    override fun obtenerProducto(proveedorId: String, nombreItem: String): Producto {
+<span class="fc" id="L35">        return TransactionRunner.runTrx({</span>
+<span class="fc" id="L36">            this.obtenerProveedor(proveedorId)</span>
+<span class="fc" id="L37">            this.chequearProductoDeProveedorExistente(this.productoDAO.get(proveedorId, nombreItem))</span>
+<span class="fc" id="L38">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun actualizarProducto(producto: Producto) {
+<span class="fc" id="L42">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L43">            val proveedor: Proveedor = this.obtenerProveedor(producto.idProveedor.toString())</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            if(proveedor.productos.contains(producto)){</span>
+<span class="fc" id="L45">                proveedor.removeProduct(producto)</span>
+<span class="fc" id="L46">                proveedor.addProduct(producto)</span>
+            }else{
+<span class="fc" id="L48">                throw ProductoNoEncontradoException(&quot;No existe el producto en la coleccion del proveedor&quot;)</span>
+            }
+<span class="fc" id="L50">            this.proveedorDAO.update(proveedor, proveedor.id.toString())</span>
+<span class="fc" id="L51">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L52">    }</span>
+
+    override fun recuperarATodosLosProductos(): Collection&lt;Producto&gt; {
+<span class="fc" id="L55">        return TransactionRunner.runTrx({ this.productoDAO.getAll() }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun recuperarProducto(id: String): Producto {
+<span class="fc" id="L59">        return TransactionRunner.runTrx({</span>
+<span class="fc" id="L60">            this.chequearProducto(this.productoDAO.get(id))</span>
+<span class="fc" id="L61">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun borrarProducto(id: String) {
+<span class="fc" id="L65">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L66">            val producto: Producto = this.chequearProducto(this.productoDAO.get(id))</span>
+<span class="fc" id="L67">            val proveedor: Proveedor = this.obtenerProveedor(producto.idProveedor.toString())</span>
+<span class="fc" id="L68">            proveedor.removeProduct(producto)</span>
+<span class="fc" id="L69">            this.proveedorDAO.update(proveedor,proveedor.id.toString())</span>
+<span class="fc" id="L70">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L71">    }</span>
+
+    override fun deleteAll() {
+<span class="fc" id="L74">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L75">            val proveedores = this.proveedorDAO.getAll()</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            for(proveedor in proveedores){</span>
+<span class="fc" id="L77">                proveedor.productos.clear()</span>
+<span class="fc" id="L78">                this.proveedorDAO.update(proveedor,proveedor.id.toString())</span>
+            }
+<span class="fc" id="L80">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L81">    }</span>
+
+    private fun obtenerProveedor(id: String): Proveedor{
+<span class="fc" id="L84">        val proveedorRecuperado = this.proveedorDAO.get(id)</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        return proveedorRecuperado?:throw ProveedorInexistenteException(&quot;El proveedor no existe&quot;)</span>
+    }
+
+    private fun chequearProductoDeProveedorExistente(producto: Producto?): Producto {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        return producto ?: throw ProductoNoEncontradoException(&quot;El proveedor no posee el producto pedido&quot;)</span>
+    }
+
+    private fun chequearProducto(producto: Producto?): Producto {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        return producto ?: throw ProductoInexistenteException(&quot;El producto no existe&quot;)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

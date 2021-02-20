@@ -5,11 +5,11 @@ Somos un equipo de programadores que llevamos a cabo un proyecto para migrar hac
 
 La inversión en si es muy rentable, ya que no solo el flujo de concurrentes habituales estan asegurados, sino que tambien esta nueva modalidad expande las oportunidades de negocios a consumidores del interior del pais que de otra manera hubieran estado impedidos geograficamente.
  
-[![Java-CI Actions Status](https://github.com/CristianGonzalez1980/exposicion-virtual/workflows/Java-CI/badge.svg)](https://github.com/CristianGonzalez1980/exposicion-virtual/actions)
+[![Java-CI Actions Status](https://github.com/CristianGonzalez1980/sietelotos-bk/workflows/Java-CI/badge.svg)](https://github.com/CristianGonzalez1980/sietelotos-bk/actions)
 
-# Expo Virtual
+# Proyecto
 
-- **Nombre**: Expo Virtual
+- **Nombre**: Site Lotos
 - **Tipo**: Aplicación web
 
 ## Tecnologías uitlizadas al desarrollar
@@ -34,6 +34,6 @@ La inversión en si es muy rentable, ya que no solo el flujo de concurrentes hab
 - Heroku (CD)
 
 # Links:
-- URL de la API: https://exposicion-virtual.herokuapp.com/
-- URL de la aplicación web: https://expofront.herokuapp.com/
+- URL de la API: https://sietelotos.herokuapp.com/
+- URL de la aplicación web: https://sietelotosartesanias.herokuapp.com/
 

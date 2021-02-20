@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.modelo</a> &gt; <span class="el_source">Usuario.kt</span></div><h1>Usuario.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.modelo
+
+class Usuario : ModelObjectWithBsonId {
+<span class="fc" id="L4">    var nombre: String = &quot;&quot;</span>
+<span class="fc" id="L5">    var apellido: String = &quot;&quot;</span>
+<span class="fc" id="L6">    var dni : Int = 0</span>
+
+<span class="fc" id="L8">    constructor()</span>
+
+    constructor(
+        nombre: String,
+        apellido: String,
+        dni: Int
+    ) {
+<span class="fc" id="L15">        this.nombre = nombre</span>
+<span class="fc" id="L16">        this.apellido = apellido</span>
+<span class="fc" id="L17">        this.dni = dni</span>
+    }
+//    override fun castearAMiTipo(other: Any): Usuario {
+//        return  other as Usuario
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UsuarioServiceImpl.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ar.edu.unq siete-lotos</a> &gt; <a href="index.source.html" class="el_package">ar.edu.unq.services.impl</a> &gt; <span class="el_source">UsuarioServiceImpl.kt</span></div><h1>UsuarioServiceImpl.kt</h1><pre class="source lang-java linenums">package ar.edu.unq.services.impl
+
+import ar.edu.unq.dao.UsuarioDAO
+import ar.edu.unq.modelo.Usuario
+import ar.edu.unq.services.UsuarioService
+import ar.edu.unq.services.impl.exceptions.*
+import ar.edu.unq.services.runner.DataBaseType
+import ar.edu.unq.services.runner.TransactionRunner
+import ar.edu.unq.services.runner.TransactionType
+
+<span class="fc" id="L11">class UsuarioServiceImpl(</span>
+    private val usuarioDAO: UsuarioDAO,
+    private val dataBaseType: DataBaseType
+) : UsuarioService {
+
+    override fun recuperarUsuario(id: String): Usuario {
+<span class="fc" id="L17">        return TransactionRunner.runTrx({</span>
+<span class="fc" id="L18">            this.obtenerUsuario(id)</span>
+<span class="fc" id="L19">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun recuperarUsuario(dni: Int): Usuario {
+<span class="fc" id="L23">        return TransactionRunner.runTrx({</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            this.usuarioDAO.findEq(&quot;dni&quot;,dni).firstOrNull()?: throw UsuarioInexistenteException(&quot;El usuario no existe&quot;)</span>
+<span class="fc" id="L25">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    override fun crearUsuario(usuario: Usuario) {
+<span class="fc" id="L29">        TransactionRunner.runTrx({</span>
+<span class="fc" id="L30">            this.asegurarQueUsuarioNoExista(usuario.id.toString())</span>
+<span class="fc" id="L31">            this.asegurarQueUsuarioNoExista(usuario.dni)</span>
+<span class="fc" id="L32">            this.validateDni(usuario.dni)</span>
+<span class="fc" id="L33">            this.usuarioDAO.save(usuario)</span>
+<span class="fc" id="L34">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L35">    }</span>
+
+    override fun recuperarATodosLosUsuarios(): Collection&lt;Usuario&gt; {
+<span class="fc" id="L38">        return TransactionRunner.runTrx({ this.usuarioDAO.getAll() }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+    }
+
+    private fun obtenerUsuario(id: String): Usuario{
+<span class="fc" id="L42">        val usuarioRecuperado = this.usuarioDAO.get(id)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        return usuarioRecuperado?:throw UsuarioInexistenteException(&quot;El usuario no existe&quot;)</span>
+    }
+    private fun asegurarQueUsuarioNoExista(id: String) {
+<span class="fc" id="L46">        val usuario = this.usuarioDAO.get(id)</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if(usuario != null){</span>
+<span class="fc" id="L48">            throw UsuarioExistenteException(&quot;El usuario ya existe&quot;)</span>
+        }
+<span class="fc" id="L50">    }</span>
+    private fun asegurarQueUsuarioNoExista(dni: Int) {
+<span class="fc" id="L52">        val usuario = this.usuarioDAO.findEq(&quot;dni&quot;, dni).firstOrNull()</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if(usuario != null){</span>
+<span class="fc" id="L54">            throw UsuarioExistenteException(&quot;El usuario ya existe&quot;)</span>
+        }
+<span class="fc" id="L56">    }</span>
+
+    private fun validateDni(dni: Int) {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if(dni&lt;1000000){</span>
+<span class="fc" id="L60">            throw UsuarioConDniInvalidoException(&quot;DNI invalido, debe ser un numero con 7 u 8 digitos&quot;)</span>
+        }
+<span class="fc" id="L62">    }</span>
+
+    override fun deleteAll() {
+<span class="fc" id="L65">        TransactionRunner.runTrx({ this.usuarioDAO.deleteAll() }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
+<span class="fc" id="L66">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

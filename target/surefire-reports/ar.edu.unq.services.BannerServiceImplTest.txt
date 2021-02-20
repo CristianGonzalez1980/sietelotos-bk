@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ar.edu.unq.services.BannerServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.647 s - in ar.edu.unq.services.BannerServiceImplTest
