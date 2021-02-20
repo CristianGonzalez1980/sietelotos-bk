@@ -1,0 +1,33 @@
+.row .col .s4 {
+  width: 33.3333333333%;
+  margin-left: -32px;
+}
+
+.collapsible-body {
+  display: grid !important;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0rem;
+}
+
+.btn,
+.btn-large,
+.btn-small {
+  text-decoration: none;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  letter-spacing: 0.5px;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.red.lighten-2 {
+  background-color:#cb1f30 !important;
+  color: white;
+  width: 95%;
+  margin-left: 0.7rem;
+ }

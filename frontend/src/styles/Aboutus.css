@@ -1,0 +1,33 @@
+#textP {
+  text-align: justify;
+  margin-left: 15%;
+  margin-right: 15%;
+ /* margin: 1% 25%;*/
+  font-size: large;
+}
+#textEnd {
+  text-align: justify;
+  margin: 4% 15% 6%;
+ /* margin: 1% 25%;
+  margin-bottom: 60px;*/
+  font-size: large;
+}
+
+#textH2 {
+  text-align: center;
+  margin: 1% 15% 3%;
+}
+
+#textH3 {
+  text-align: center;
+  margin: 1% 15%;
+}
+
+#textH1 {
+ /*margin-top: 60px;*/
+  text-align: center;
+}
+
+.mt-4{
+  margin-top: 200px;
+}

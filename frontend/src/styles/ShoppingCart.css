@@ -1,0 +1,66 @@
+#imgCart {
+  width: 40%;
+}
+
+#tdCart {
+  width: 25%;
+}
+
+#inptCartCant {
+  width: 20%;
+  text-align: center;
+}
+
+#noHayElementos {
+  font-size: 4rem;
+  margin-top: 4rem;
+  margin-left: 5%;
+  min-height: 20rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+.cart {
+  width: 80%;
+  padding-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 0%;
+  padding-bottom: 1%;
+}
+
+.centerField {
+  text-align: center;
+}
+
+.rightField {
+  text-align: right;
+}
+
+td,
+th {
+ text-align:center;
+}
+
+#currieroption {
+  font-size: 30px;
+}
+
+[type="radio"]:not(:checked) + span, [type="radio"]:checked + span {
+  position: relative;
+  text-align: left;
+  padding-left: 35px;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  font-size: 2rem;
+  -webkit-transition: .28s ease;
+  transition: .28s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

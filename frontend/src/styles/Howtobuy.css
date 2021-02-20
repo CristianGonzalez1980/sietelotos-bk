@@ -1,0 +1,20 @@
+#HTBh1 {
+  /*width: 40%;
+  margin: 0% 40% 0%;*/
+  text-align: center;
+}
+
+#olList {
+  /*width: 60%;*/
+  text-align: justify;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 6%;/*
+  margin: 4% 20% 6%;*/
+  font-size: large;
+}
+
+.mt-4{
+  margin-top: 200px;
+  margin-bottom: 6%;
+}

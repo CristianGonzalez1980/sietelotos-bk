@@ -1,0 +1,38 @@
+#colCard {
+  width: 32%;
+  margin-left: auto;
+  right: auto;
+}
+
+#cardViewProveedor_Product {
+  width: 100%;
+ /* height: 27rem;*/
+  min-height: 28rem !important;
+}
+
+#iconSearchFormAdmin {
+  margin-top: 19px;
+  margin-left: -10px;
+  color: gray;
+}
+
+#formimputSearch {
+  margin-bottom: 60px;
+}
+
+.card {
+  position: relative;
+  margin: 0 0 1.5 rem 0;
+  background-color: #fff;
+  -webkit-transition: -webkit-box-shadow 0.25s;
+  transition: -webkit-box-shadow 0.25s;
+  transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+  border-radius: 2px;
+  min-height: 15rem;
+}
+
+.card .card-image {
+  position: relative;
+  min-height: 15rem;
+}

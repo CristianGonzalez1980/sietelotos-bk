@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
+
+.img {
+  background-size: auto;
+  background-position: right;
+  max-height: 100%;
+  max-width : 100%; 
+}
+.slider .slides li {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  max-height: 100%;
+  max-width : 100%; 
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+.slider .indicators {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: -10;
+}
+
+.slider .slides li .caption {
+  color: #070707 !important;
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  max-height: 100%;
+  max-width : 100%; 
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.slider .slides {
+ background-color:#9e9e9e00;
+ margin:0;
+ max-height: 100%;
+ max-width : 100%;
+}
+
+.productos {
+  font-size: 2.64rem;
+  line-height: 1%;
+  text-align: center;
+  color: burlywood;
+}
+
+.carousel .indicators {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: rgba(255, 0, 0, 0.404);
+}
+#googleFont {
+    font-family: "Dancing Script", cursive;
+  text-shadow: 1px 1px hsla(0, 0%, 0%, 0.658);
+  font-size: 5rem;
+  margin-top: 8rem;
+}
+
+.carousel {
+  height: 350px;
+}
