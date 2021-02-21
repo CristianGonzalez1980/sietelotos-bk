@@ -48,13 +48,13 @@ abstract class ModelObjectWithBsonIdTest<T: ModelObjectWithBsonId>(private val e
     @Test
     fun testElHashCodeDeUnObjetoEsIgualAlDeOtroConElMismoId(){
         this.t2!!.id = this.t1!!.id
-        assertEquals(this.t1.hashCode(), this.t2.hashCode())
+        assertEquals(this.t1!!.hashCode(), this.t2!!.hashCode())
     }
 
     @Test
     fun testElHashCodeDeUnObjetoEsDistintoAlDeOtroConDiferenteId(){
         val t = entityType.getDeclaredConstructor().newInstance()
         assertNotEquals(this.t1!!.id, t.id)
-        assertNotEquals(this.t1.hashCode(), t.hashCode())
+        assertNotEquals(this.t1!!.hashCode(), t.hashCode())
     }
 }

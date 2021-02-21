@@ -9,6 +9,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import kotlin.math.roundToInt
 
 class ApiTest {
 
@@ -56,15 +57,19 @@ class ApiTest {
     @Test
     fun convertAProductoListToViewMapperList() {
         val prodMappList: List<Any> = auxFuc.productoClassListToProductoViewList(listaProd)
+        val listSize = prodMappList.size
+        val randomNumber = Math.floor(Math.random()*listSize).toInt()
         Assert.assertTrue(prodMappList is MutableList<*>)
-        Assert.assertTrue(prodMappList.random() is ProductViewMapper)
+        Assert.assertTrue(prodMappList[randomNumber] is ProductViewMapper)
     }
 
     @Test
     fun convertAProveedorListToViewMapperList() {
         val provMappList: List<Any> = auxFuc.proveedorClassListToProveedorViewList(listaProv)
+        val listSize = provMappList.size
+        val randomNumber = Math.floor(Math.random()*listSize).toInt()
         Assert.assertTrue(provMappList is MutableList<*>)
-        Assert.assertTrue(provMappList.random() is CompanyViewMapper)
+        Assert.assertTrue(provMappList[randomNumber] is CompanyViewMapper)
     }
 
   /*  @Test(expected = ConstraintViolationException::class)

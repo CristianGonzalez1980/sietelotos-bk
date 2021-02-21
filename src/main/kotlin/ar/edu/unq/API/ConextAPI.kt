@@ -4,8 +4,11 @@ import ar.edu.unq.API.JWTAccessManager
 import ar.edu.unq.API.TokenJWT
 import ar.edu.unq.API.controllers.*
 import ar.edu.unq.dao.mongodb.*
+import ar.edu.unq.modelo.Admin
 import ar.edu.unq.services.impl.*
 import ar.edu.unq.services.runner.DataBaseType
+import ar.edu.unq.services.runner.TransactionRunner.runTrx
+import ar.edu.unq.services.runner.TransactionType
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.path
 import io.javalin.apibuilder.ApiBuilder.*
@@ -32,11 +35,13 @@ fun main(args: Array<String>) {
     val adminController = AdminController(backendAdminService, tokenJWT, jwtAccessManager)
     val paymentController = PaymentController()
 
+
 /*
     runTrx({
         MongoAdminDAOImpl().save(Admin("admin","admin"))
     }, listOf(TransactionType.MONGO),DataBaseType.PRODUCCION)
 */
+
 
     val app = Javalin.create {
         it.defaultContentType = "application/json"

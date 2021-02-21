@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.mongodb.MongoProductoDAOTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.843 s - in ar.edu.unq.mongodb.MongoProductoDAOTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.043 s - in ar.edu.unq.mongodb.MongoProductoDAOTest

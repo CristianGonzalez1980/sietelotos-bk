@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 ar.edu.unq siete-lotos,ar.edu.unq.modelo,BuscadorProductos.filtrar..inlined.sortedByDescending.new Comparator() {...},0,30,0,0,0,3,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.modelo,BuscadorProductos.cantidadDeItemsContenidasEnTexto.aMin.new Function1() {...},0,13,0,0,0,1,0,1,0,1
-ar.edu.unq siete-lotos,ar.edu.unq.modelo,BuscadorProductos,1,352,2,24,0,37,2,16,0,5
+ar.edu.unq siete-lotos,ar.edu.unq.modelo,BuscadorProductos,1,344,2,24,0,37,2,16,0,5
 ar.edu.unq siete-lotos,ar.edu.unq.modelo,Proveedor,0,180,0,0,0,19,0,18,0,18
 ar.edu.unq siete-lotos,ar.edu.unq.modelo,ModelObjectWithBsonId,0,63,0,8,0,8,0,10,0,6
 ar.edu.unq siete-lotos,ar.edu.unq.modelo,Admin,0,50,0,0,0,5,0,6,0,6
@@ -44,7 +44,7 @@ ar.edu.unq siete-lotos,ar.edu.unq,ConextAPIKt.main.2.6.new EndpointGroup() {...}
 ar.edu.unq siete-lotos,ar.edu.unq.services.runner.exceptions,DataBaseNameNotSettedException,0,7,0,0,0,1,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.runner.exceptions,NoTransactionsException,0,7,0,0,0,1,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.runner.exceptions,NoSessionContextException,0,7,0,0,0,1,0,1,0,1
-ar.edu.unq siete-lotos,ar.edu.unq.modelo.banner,BannerCategory.Companion,0,52,0,2,0,5,0,2,0,1
+ar.edu.unq siete-lotos,ar.edu.unq.modelo.banner,BannerCategory.Companion,0,53,0,2,0,5,0,2,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.modelo.banner,Banner,0,45,0,0,0,5,0,6,0,6
 ar.edu.unq siete-lotos,ar.edu.unq.services.runner,TransactionRunner,0,173,0,12,0,26,0,9,0,3
 ar.edu.unq siete-lotos,ar.edu.unq.services.runner,TransactionType.MONGO,0,10,0,0,0,2,0,2,0,2
@@ -56,7 +56,7 @@ ar.edu.unq siete-lotos,ar.edu.unq.services.runner,MongoSessionFactoryProvider.Co
 ar.edu.unq siete-lotos,ar.edu.unq.helpers,PropertyHelper,0,7,0,0,0,1,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.impl,AdminServiceImpl.recuperarAdmin.new Function0() {...},0,6,0,0,0,1,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.impl,ProveedorServiceImpl.recuperarATodosLosProveedores.new Function0() {...},0,5,0,0,0,1,0,1,0,1
-ar.edu.unq siete-lotos,ar.edu.unq.services.impl,AdminServiceImpl.recuperarAdmin.new Function0() {...},0,60,0,6,0,6,0,4,0,1
+ar.edu.unq siete-lotos,ar.edu.unq.services.impl,AdminServiceImpl.recuperarAdmin.new Function0() {...},0,61,0,6,0,6,0,4,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.impl,ProveedorServiceImpl,0,138,0,4,0,20,0,11,0,9
 ar.edu.unq siete-lotos,ar.edu.unq.services.impl,ProveedorServiceImpl.recuperarProveedor.new Function0() {...},0,6,0,0,0,1,0,1,0,1
 ar.edu.unq siete-lotos,ar.edu.unq.services.impl,ProductoServiceImpl.actualizarProducto.new Function0() {...},0,41,0,2,0,7,0,2,0,1
