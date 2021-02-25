@@ -5,12 +5,13 @@ enum class BannerCategory {
     SCHEDULE,
     CLASS,
     COURRIER,
+    BACKGROUND,
     PAYMENTMETHODS;
 
     companion object{
         @JvmStatic
         fun isValid(string: String): Boolean{
-<span class="fc" id="L13">            return values().map { it.name }.contains(string)</span>
+<span class="fc" id="L14">            return values().map { it.name }.contains(string)</span>
         }
     }
 

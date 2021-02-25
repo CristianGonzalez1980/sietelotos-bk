@@ -3,77 +3,69 @@
 import ar.edu.unq.dao.ProductoDAO
 import ar.edu.unq.helpers.PropertyHelper.publicProperties
 import ar.edu.unq.modelo.Producto
-import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Aggregates.*
 import com.mongodb.client.model.Filters.and
 import com.mongodb.client.model.Filters.eq
-import io.javalin.core.util.RouteOverviewUtil.metaInfo
 import org.bson.Document
 import org.bson.types.ObjectId
-import java.util.*
-import kotlin.reflect.KClass
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty
-import kotlin.reflect.KVisibility
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
-<span class="fc" id="L22">class MongoProductoDAOImpl : ProductoDAO, GenericMongoDAO&lt;Producto&gt;(Producto::class.java) {</span>
+
+<span class="fc" id="L14">class MongoProductoDAOImpl : ProductoDAO, GenericMongoDAO&lt;Producto&gt;(Producto::class.java) {</span>
 
     override fun save(objects: List&lt;Producto&gt;) {
-<span class="fc" id="L25">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
+<span class="fc" id="L17">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
     }
 
     override fun update(anObject: Producto, id: String?) {
-<span class="fc" id="L29">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
+<span class="fc" id="L21">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
     }
 
     override fun deleteAll() {
-<span class="fc" id="L33">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
+<span class="fc" id="L25">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
     }
 
     override fun &lt;E&gt; deleteBy(property: String, value: E?) {
-<span class="fc" id="L37">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
+<span class="fc" id="L29">        throw Exception(&quot;Este metodo no esta permitido&quot;)</span>
     }
 
     override fun get(idProveedor: String, nombreProducto: String): Producto? {
-<span class="fc" id="L41">        return find(</span>
-<span class="fc" id="L42">                and(</span>
-<span class="fc" id="L43">                        eq(&quot;idProveedor&quot;, ObjectId(idProveedor)),</span>
-<span class="fc" id="L44">                        eq(&quot;itemName&quot;,nombreProducto)</span>
+<span class="fc" id="L33">        return find(</span>
+<span class="fc" id="L34">                and(</span>
+<span class="fc" id="L35">                        eq(&quot;idProveedor&quot;, ObjectId(idProveedor)),</span>
+<span class="fc" id="L36">                        eq(&quot;itemName&quot;,nombreProducto)</span>
                 )
-<span class="fc" id="L46">        ).firstOrNull()</span>
+<span class="fc" id="L38">        ).firstOrNull()</span>
     }
 
     override fun createColection(objectType: String, database: MongoDatabase) {
-<span class="fc" id="L50">        this.borrarViewSiCambiaronAtributos(database)</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if(database.listCollectionNames().contains(&quot;Producto&quot;).not()) {</span>
-<span class="fc" id="L52">            super.createColection(&quot;Proveedor&quot;, database)</span>
-<span class="fc" id="L53">            val proyectarProductos = project(Document(&quot;listProducts&quot;, &quot;\$productos&quot;))</span>
-<span class="fc" id="L54">            val separarProductos = unwind(&quot;\$listProducts&quot;)</span>
-<span class="fc" id="L55">            val proyectarProductosIndividuales = project(this.estructuraDeProducto())</span>
-<span class="fc" id="L56">            database.createView(&quot;Producto&quot;, &quot;Proveedor&quot;, listOf(</span>
-<span class="fc" id="L57">                    proyectarProductos,</span>
-<span class="fc" id="L58">                    separarProductos,</span>
-<span class="fc" id="L59">                    proyectarProductosIndividuales</span>
+<span class="fc" id="L42">        this.borrarViewSiCambiaronAtributos(database)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(database.listCollectionNames().contains(&quot;Producto&quot;).not()) {</span>
+<span class="fc" id="L44">            super.createColection(&quot;Proveedor&quot;, database)</span>
+<span class="fc" id="L45">            val proyectarProductos = project(Document(&quot;listProducts&quot;, &quot;\$productos&quot;))</span>
+<span class="fc" id="L46">            val separarProductos = unwind(&quot;\$listProducts&quot;)</span>
+<span class="fc" id="L47">            val proyectarProductosIndividuales = project(this.estructuraDeProducto())</span>
+<span class="fc" id="L48">            database.createView(&quot;Producto&quot;, &quot;Proveedor&quot;, listOf(</span>
+<span class="fc" id="L49">                    proyectarProductos,</span>
+<span class="fc" id="L50">                    separarProductos,</span>
+<span class="fc" id="L51">                    proyectarProductosIndividuales</span>
             )
             )
         }
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L55">    }</span>
 
     private fun borrarViewSiCambiaronAtributos(database: MongoDatabase){
-<span class="fc bfc" id="L66" title="All 4 branches covered.">        if(database.listCollectionNames().contains(&quot;Producto&quot;) &amp;&amp; this.propiedadesViewProducto(database) != publicProperties&lt;Producto&gt;().map { it.name }.toSet()){</span>
-<span class="fc" id="L67">            database.getCollection(&quot;Producto&quot;).drop()</span>
+<span class="fc bfc" id="L58" title="All 4 branches covered.">        if(database.listCollectionNames().contains(&quot;Producto&quot;) &amp;&amp; this.propiedadesViewProducto(database) != publicProperties&lt;Producto&gt;().map { it.name }.toSet()){</span>
+<span class="fc" id="L59">            database.getCollection(&quot;Producto&quot;).drop()</span>
         }
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L61">    }</span>
 
     private fun estructuraDeProducto(): Document{
-<span class="fc" id="L72">        return Document(mutableMapOf&lt;String,String&gt;().plus(publicProperties&lt;Producto&gt;().map { Pair(it.name, &quot;\$listProducts.${it.name}&quot;) }))</span>
+<span class="fc" id="L64">        return Document(mutableMapOf&lt;String,String&gt;().plus(publicProperties&lt;Producto&gt;().map { Pair(it.name, &quot;\$listProducts.${it.name}&quot;) }))</span>
     }
 
     private fun propiedadesViewProducto(database: MongoDatabase): Set&lt;String&gt;{
-<span class="fc bfc" id="L76" title="All 2 branches covered.">        return database.listCollections().toList().first { it[&quot;name&quot;] == &quot;Producto&quot; }.get(&quot;options&quot;, Document::class.java).get(&quot;pipeline&quot;, listOf(Document(&quot;pipeline&quot;, Document(&quot;\$project&quot;, emptyList&lt;String&gt;())))).last().get(&quot;\$project&quot;, Document::class.java).keys</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        return database.listCollections().toList().first { it[&quot;name&quot;] == &quot;Producto&quot; }.get(&quot;options&quot;, Document::class.java).get(&quot;pipeline&quot;, listOf(Document(&quot;pipeline&quot;, Document(&quot;\$project&quot;, emptyList&lt;String&gt;())))).last().get(&quot;\$project&quot;, Document::class.java).keys</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.cargadeunproducto.CargaDeUnProductoTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.164 s - in ar.edu.unq.cucumber.cargadeunproducto.CargaDeUnProductoTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.746 s - in ar.edu.unq.cucumber.cargadeunproducto.CargaDeUnProductoTest

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.services.ProveedorServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.989 s - in ar.edu.unq.services.ProveedorServiceImplTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.379 s - in ar.edu.unq.services.ProveedorServiceImplTest

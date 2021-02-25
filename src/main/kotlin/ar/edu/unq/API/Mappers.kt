@@ -16,6 +16,8 @@ data class CompanyNameViewMapper(val companyName: String)
 
 data class CompanyImageViewMapper(val companyImage: String)
 
+data class SettingsViewMapper(val id: String, val backgroundColor: String)
+
 data class BannerViewMapper(val id: String, val image: String, val category: String)
 
 data class CompanyViewMapper(val id: String,
@@ -62,6 +64,8 @@ data class ProductRegisterMapper(val idProveedor: String?,
                                  val ancho: Int?,
                                  val alto: Int?,
                                  val pesoGr: Int?)
+
+data class SettingsRegisterMapper(val backgroundColor: String?)
 
 data class SaleMapper(val idProducto: String, val cantidadVendida: Int)
 

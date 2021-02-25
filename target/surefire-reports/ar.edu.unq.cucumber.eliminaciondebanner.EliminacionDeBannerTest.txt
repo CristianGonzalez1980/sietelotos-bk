@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.eliminaciondebanner.EliminacionDeBannerTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.1 s - in ar.edu.unq.cucumber.eliminaciondebanner.EliminacionDeBannerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.067 s - in ar.edu.unq.cucumber.eliminaciondebanner.EliminacionDeBannerTest

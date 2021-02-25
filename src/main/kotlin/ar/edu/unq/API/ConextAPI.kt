@@ -23,6 +23,7 @@ fun main(args: Array<String>) {
     val backendProveedorService = ProveedorServiceImpl(MongoProveedorDAOImpl(), DataBaseType.PRODUCCION)
     val backendProductoService =
         ProductoServiceImpl(MongoProveedorDAOImpl(), MongoProductoDAOImpl(), DataBaseType.PRODUCCION)
+    val backendSettingsService = SettingsServiceImpl(MongoSettingsDAOImpl(), DataBaseType.PRODUCCION)
     val backendBannerService = BannerServiceImpl(MongoBannerDAOImpl(), DataBaseType.PRODUCCION)
     val backendUsuarioService = UsuarioServiceImpl(MongoUsuarioDAOImpl(), DataBaseType.PRODUCCION)
     val backendAdminService = AdminServiceImpl(MongoAdminDAOImpl(), DataBaseType.PRODUCCION)
@@ -30,6 +31,7 @@ fun main(args: Array<String>) {
     val jwtAccessManager = JWTAccessManager(tokenJWT, backendUsuarioService)
     val bannerController = BannerController(backendBannerService, backendProveedorService)
     val productController = ProductController(backendProveedorService, backendProductoService)
+    val settingsController = SettingsController(backendSettingsService)
     val companyController = CompanyController(backendProveedorService)
     val userController = UserController(backendUsuarioService, tokenJWT, jwtAccessManager)
     val adminController = AdminController(backendAdminService, tokenJWT, jwtAccessManager)
@@ -128,6 +130,14 @@ fun main(args: Array<String>) {
                 post(productController::createMassive, mutableSetOf<Role>(Roles.ADMIN, Roles.ANYONE))
             }
 
+        }
+
+        path("settings") {
+            get(settingsController::settings, mutableSetOf<Role>(Roles.ANYONE, Roles.USER, Roles.ADMIN))
+            post(settingsController::addSettings, mutableSetOf<Role>(Roles.ADMIN, Roles.ANYONE))
+            path(":settingId") {
+                put(settingsController::updateSettings, mutableSetOf<Role>(Roles.ADMIN, Roles.ANYONE))
+            }
         }
         path("productSales") {
             put(productController::decreaseProduct, mutableSetOf<Role>(Roles.ANYONE,Roles.USER))

@@ -3,21 +3,13 @@ package ar.edu.unq.dao.mongodb
 import ar.edu.unq.dao.ProductoDAO
 import ar.edu.unq.helpers.PropertyHelper.publicProperties
 import ar.edu.unq.modelo.Producto
-import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Aggregates.*
 import com.mongodb.client.model.Filters.and
 import com.mongodb.client.model.Filters.eq
-import io.javalin.core.util.RouteOverviewUtil.metaInfo
 import org.bson.Document
 import org.bson.types.ObjectId
-import java.util.*
-import kotlin.reflect.KClass
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty
-import kotlin.reflect.KVisibility
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+
 
 class MongoProductoDAOImpl : ProductoDAO, GenericMongoDAO<Producto>(Producto::class.java) {
 
