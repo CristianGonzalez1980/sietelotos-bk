@@ -5,6 +5,7 @@ enum class BannerCategory {
     SCHEDULE,
     CLASS,
     COURRIER,
+    BACKGROUND,
     PAYMENTMETHODS;
 
     companion object{
