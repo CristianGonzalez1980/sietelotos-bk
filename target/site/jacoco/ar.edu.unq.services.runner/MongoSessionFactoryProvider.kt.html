@@ -34,13 +34,13 @@ import org.bson.codecs.pojo.PojoCodecProvider
         val instance: MongoSessionFactoryProvider
             get() {
 <span class="fc bfc" id="L36" title="All 2 branches covered.">                INSTANCE = INSTANCE ?: MongoSessionFactoryProvider()</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                return  INSTANCE!!</span>
+<span class="fc" id="L37">                return  INSTANCE!!</span>
             }
 
         fun destroy() {
-<span class="pc bpc" id="L41" title="1 of 6 branches missed.">            if (INSTANCE != null &amp;&amp; INSTANCE!!.session != null) {</span>
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">                INSTANCE!!.client.close()</span>
-<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                INSTANCE!!.session = null</span>
+<span class="fc bfc" id="L41" title="All 4 branches covered.">            if (INSTANCE != null &amp;&amp; INSTANCE!!.session != null) {</span>
+<span class="fc" id="L42">                INSTANCE!!.client.close()</span>
+<span class="fc" id="L43">                INSTANCE!!.session = null</span>
             }
 <span class="fc" id="L45">            INSTANCE = null</span>
 <span class="fc" id="L46">        }</span>

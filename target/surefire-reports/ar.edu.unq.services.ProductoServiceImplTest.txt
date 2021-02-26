@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.services.ProductoServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.877 s - in ar.edu.unq.services.ProductoServiceImplTest
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.105 s - in ar.edu.unq.services.ProductoServiceImplTest

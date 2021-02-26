@@ -25,7 +25,7 @@
 <span class="fc" id="L25">            Pair(</span>
 <span class="fc" id="L26">                    cantidadPalabrasContenidasEnTexto(texto, it.itemName) + cantidadDeItemsContenidasEnTexto(it.listTags, texto) + cantidadPalabrasContenidasEnTexto(texto, it.description),</span>
 <span class="fc" id="L27">                    it</span>
-<span class="fc" id="L28">            )</span>
+            )
 <span class="fc bfc" id="L29" title="All 4 branches covered.">        }.filter { it.first &gt; 0 }.sortedBy {  it.second.itemName }.sortedByDescending { it.first }.map { it.second }.toMutableList()</span>
     }
 

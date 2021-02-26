@@ -16,7 +16,8 @@ class SettingsController(val backendSettingsService: SettingsService) {
    fun addSettings(ctx: Context){
         try {
             val newSettings = aux.settingsBodyValidation(ctx)
-            val settings = Settings(newSettings.backgroundColor!!)
+            val settings = Settings(newSettings.backgroundColor!!, newSettings.backgroundColorFooter!!,
+                newSettings.backgroundColorWrapp!!, newSettings.backgroundColorSide!!)
             backendSettingsService.newSettings(settings)
             ctx.status(201)
             ctx.json(OkResultMapper("ok"))
@@ -27,15 +28,18 @@ class SettingsController(val backendSettingsService: SettingsService) {
 
     fun updateSettings(ctx: Context) {
         try {
-            val id = ctx.pathParam("productId")
+            val id = ctx.pathParam("settingId")
             val newSettings = aux.settingsBodyValidation(ctx)
             val settings = backendSettingsService.recuperarSettings(id)
 
             settings.backgroundColor = newSettings.backgroundColor!!
-
+            settings.backgroundColorFooter = newSettings.backgroundColorFooter!!
+            settings.backgroundColorSide = newSettings.backgroundColorSide!!
+            settings.backgroundColorWrapp = newSettings.backgroundColorWrapp!!
             backendSettingsService.actualizarSettings(settings)
 
             val updated = this.backendSettingsService.recuperarSettings(id)
+
             ctx.json(aux.settingsClassToSettingsView(updated))
         } catch (e: SettingsInexistenteException) {
             throw NotFoundResponse(e.message.toString())

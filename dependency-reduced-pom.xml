@@ -198,6 +198,11 @@
           <artifactId>javalin</artifactId>
           <version>3.11.0</version>
       </dependency>
+      <dependency>
+          <groupId>com.github.kmehrunes</groupId>
+          <artifactId>javalin-jwt</artifactId>
+          <version>v0.2</version>
+      </dependency>
   </dependencies>
   <properties>
     <exec.mainClass>ar.edu.unq.ConextAPIKt</exec.mainClass>

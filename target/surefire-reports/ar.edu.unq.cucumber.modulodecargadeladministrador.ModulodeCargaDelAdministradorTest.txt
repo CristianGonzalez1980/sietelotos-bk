@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.modulodecargadeladministrador.ModulodeCargaDelAdministradorTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.507 s - in ar.edu.unq.cucumber.modulodecargadeladministrador.ModulodeCargaDelAdministradorTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.294 s - in ar.edu.unq.cucumber.modulodecargadeladministrador.ModulodeCargaDelAdministradorTest

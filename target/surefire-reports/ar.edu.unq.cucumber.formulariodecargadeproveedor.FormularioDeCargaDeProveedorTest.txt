@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.formulariodecargadeproveedor.FormularioDeCargaDeProveedorTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.736 s - in ar.edu.unq.cucumber.formulariodecargadeproveedor.FormularioDeCargaDeProveedorTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.443 s - in ar.edu.unq.cucumber.formulariodecargadeproveedor.FormularioDeCargaDeProveedorTest

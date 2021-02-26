@@ -4,15 +4,17 @@ import org.bson.types.ObjectId
 
 
 class Settings : ModelObjectWithBsonId{
-    lateinit var idSettings: ObjectId
     var backgroundColor: String = "#b80090"
-
+    var backgroundColorFooter: String = "#b80090"
+    var backgroundColorSide: String = "#b80090"
+    var backgroundColorWrapp: String = "#b80090"
     constructor()
 
-    constructor(
-        backgroundColor: String
-    ) {
+    constructor(backgroundColor: String, backgroundColorFooter: String, backgroundColorSide: String, backgroundColorWrapp: String) {
         this.backgroundColor = backgroundColor
+        this.backgroundColorFooter = backgroundColorFooter
+        this.backgroundColorSide = backgroundColorSide
+        this.backgroundColorWrapp = backgroundColorWrapp
     }
 //
 //    override fun castearAMiTipo(other: Any): Producto {

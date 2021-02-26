@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.visualizaciondeproveedores.VisualizacionDeProveedoresTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.787 s - in ar.edu.unq.cucumber.visualizaciondeproveedores.VisualizacionDeProveedoresTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.554 s - in ar.edu.unq.cucumber.visualizaciondeproveedores.VisualizacionDeProveedoresTest

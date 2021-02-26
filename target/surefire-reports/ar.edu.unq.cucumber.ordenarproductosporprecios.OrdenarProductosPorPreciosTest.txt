@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ar.edu.unq.cucumber.ordenarproductosporprecios.OrdenarProductosPorPreciosTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.775 s - in ar.edu.unq.cucumber.ordenarproductosporprecios.OrdenarProductosPorPreciosTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.782 s - in ar.edu.unq.cucumber.ordenarproductosporprecios.OrdenarProductosPorPreciosTest

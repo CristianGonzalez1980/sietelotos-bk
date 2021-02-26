@@ -28,7 +28,7 @@ class SettingsServiceImpl(
 
     override fun actualizarSettings(settings: Settings) {
         TransactionRunner.runTrx({
-            val settings: Settings = this.obtenerSettings(settings.idSettings.toString())
+            this.obtenerSettings(settings.id.toString())
             this.settingsDAO.update(settings, settings.id.toString())
         }, listOf(TransactionType.MONGO), this.dataBaseType)
     }

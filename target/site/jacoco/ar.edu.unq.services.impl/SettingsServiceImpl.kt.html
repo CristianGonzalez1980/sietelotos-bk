@@ -28,7 +28,7 @@ import ar.edu.unq.services.runner.TransactionType
 
     override fun actualizarSettings(settings: Settings) {
 <span class="nc" id="L30">        TransactionRunner.runTrx({</span>
-<span class="nc" id="L31">            val settings: Settings = this.obtenerSettings(settings.idSettings.toString())</span>
+<span class="nc" id="L31">            this.obtenerSettings(settings.id.toString())</span>
 <span class="nc" id="L32">            this.settingsDAO.update(settings, settings.id.toString())</span>
 <span class="nc" id="L33">        }, listOf(TransactionType.MONGO), this.dataBaseType)</span>
 <span class="nc" id="L34">    }</span>

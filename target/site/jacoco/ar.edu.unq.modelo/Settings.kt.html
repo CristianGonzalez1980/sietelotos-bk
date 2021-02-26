@@ -4,15 +4,17 @@ import org.bson.types.ObjectId
 
 
 class Settings : ModelObjectWithBsonId{
-<span class="nc" id="L7">    lateinit var idSettings: ObjectId</span>
-<span class="nc" id="L8">    var backgroundColor: String = &quot;#b80090&quot;</span>
+<span class="nc" id="L7">    var backgroundColor: String = &quot;#b80090&quot;</span>
+<span class="nc" id="L8">    var backgroundColorFooter: String = &quot;#b80090&quot;</span>
+<span class="nc" id="L9">    var backgroundColorSide: String = &quot;#b80090&quot;</span>
+<span class="nc" id="L10">    var backgroundColorWrapp: String = &quot;#b80090&quot;</span>
+<span class="nc" id="L11">    constructor()</span>
 
-<span class="nc" id="L10">    constructor()</span>
-
-    constructor(
-        backgroundColor: String
-    ) {
-<span class="nc" id="L15">        this.backgroundColor = backgroundColor</span>
+    constructor(backgroundColor: String, backgroundColorFooter: String, backgroundColorSide: String, backgroundColorWrapp: String) {
+<span class="nc" id="L14">        this.backgroundColor = backgroundColor</span>
+<span class="nc" id="L15">        this.backgroundColorFooter = backgroundColorFooter</span>
+<span class="nc" id="L16">        this.backgroundColorSide = backgroundColorSide</span>
+<span class="nc" id="L17">        this.backgroundColorWrapp = backgroundColorWrapp</span>
     }
 //
 //    override fun castearAMiTipo(other: Any): Producto {
