@@ -16,7 +16,7 @@ data class CompanyNameViewMapper(val companyName: String)
 
 data class CompanyImageViewMapper(val companyImage: String)
 
-data class SettingsViewMapper(val id: String, val backgroundColor: String, val backgroundColorFooter: String, val backgroundColorSide: String, val backgroundColorWrapp: String)
+data class SettingsViewMapper(val id: String, val backgroundColor: String, val backgroundColorFooter: String, val backgroundColorSide: String, val backgroundColorWrapp: String, val backgroundColorCardLogin: String)
 
 data class BannerViewMapper(val id: String, val image: String, val category: String)
 
@@ -65,7 +65,7 @@ data class ProductRegisterMapper(val idProveedor: String?,
                                  val alto: Int?,
                                  val pesoGr: Int?)
 
-data class SettingsRegisterMapper(val backgroundColor: String?, val backgroundColorFooter: String?, val backgroundColorSide: String?, val backgroundColorWrapp: String?)
+data class SettingsRegisterMapper(val backgroundColor: String?, val backgroundColorFooter: String?, val backgroundColorSide: String?, val backgroundColorWrapp: String?, val backgroundColorCardLogin: String?)
 
 data class SaleMapper(val idProducto: String, val cantidadVendida: Int)
 

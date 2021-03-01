@@ -17,7 +17,7 @@ class SettingsController(val backendSettingsService: SettingsService) {
         try {
             val newSettings = aux.settingsBodyValidation(ctx)
             val settings = Settings(newSettings.backgroundColor!!, newSettings.backgroundColorFooter!!,
-                newSettings.backgroundColorWrapp!!, newSettings.backgroundColorSide!!)
+                newSettings.backgroundColorWrapp!!, newSettings.backgroundColorSide!!, newSettings.backgroundColorCardLogin!!)
             backendSettingsService.newSettings(settings)
             ctx.status(201)
             ctx.json(OkResultMapper("ok"))
@@ -36,6 +36,7 @@ class SettingsController(val backendSettingsService: SettingsService) {
             settings.backgroundColorFooter = newSettings.backgroundColorFooter!!
             settings.backgroundColorSide = newSettings.backgroundColorSide!!
             settings.backgroundColorWrapp = newSettings.backgroundColorWrapp!!
+            settings.backgroundColorCardLogin = newSettings.backgroundColorCardLogin!!
             backendSettingsService.actualizarSettings(settings)
 
             val updated = this.backendSettingsService.recuperarSettings(id)

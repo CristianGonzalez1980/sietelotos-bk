@@ -19,7 +19,7 @@ class AuxiliaryFunctions {
     }
 
     fun settingsClassToSettingsView(s: Settings): SettingsViewMapper {
-        return SettingsViewMapper(s.id.toString(), s.backgroundColor, s.backgroundColorFooter, s.backgroundColorSide, s.backgroundColorWrapp)
+        return SettingsViewMapper(s.id.toString(), s.backgroundColor, s.backgroundColorFooter, s.backgroundColorSide, s.backgroundColorWrapp, s.backgroundColorCardLogin)
     }
 
     fun productoClassListToProductoViewList(lista: MutableCollection<Producto>): List<ProductViewMapper> {
@@ -55,8 +55,8 @@ class AuxiliaryFunctions {
     fun settingsBodyValidation(ctx: Context): SettingsRegisterMapper {
         return ctx.bodyValidator<SettingsRegisterMapper>()
             .check(
-                { it.backgroundColor != null && it.backgroundColorFooter != null && it.backgroundColorSide != null && it.backgroundColorWrapp != null  },
-                "Invalid body : backgroundColor backgroundColorFooter backgroundColorSide backgroundColorWrapp are required"
+                { it.backgroundColor != null && it.backgroundColorFooter != null && it.backgroundColorSide != null && it.backgroundColorWrapp != null && it.backgroundColorCardLogin != null },
+                "Invalid body : backgroundColor backgroundColorFooter backgroundColorSide backgroundColorWrapp backgroundColorCardLogin are required"
             )
             .get()
     }
